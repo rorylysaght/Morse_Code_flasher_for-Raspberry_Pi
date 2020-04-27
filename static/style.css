@@ -1,0 +1,18 @@
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+  padding-left: 5px;
+  padding-right: 5px
+}
+
+td.v {
+  font-size: 2em;
+  font-family: "Lucida Console", Courier, monospace;
+  background: #ccc;
+}

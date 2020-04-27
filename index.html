@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Neopixels GUI Remote</title>
+    <link rel="shortcut icon" href="https://s3.amazonaws.com/django-blog/ico/favicon_v2.ico">
+    <link rel="stylesheet" href='/static/style.css'/>
+    <meta name="description" content="Morse Code flasher for Raspberry Pi">
+    <meta name="keywords" content="HTML,CSS,Python,Flask,Raspberry Pi,GUI">
+    <meta name="author" content="Rory MacLysaght">
+  </head>
+
+<body>
+
+<div style="border:1px solid #888;float:left; maxwidth:320px;overflow:wrap">
+<p>Learn more about Morse Code at <a href="https://en.wikipedia.org/wiki/Morse_code">Wikipedia</a></p>
+<p><a href="https://commons.wikimedia.org/wiki/File:Seaman_send_Morse_code_signals.jpg#/media/File:Seaman_send_Morse_code_signals.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Seaman_send_Morse_code_signals.jpg" width="320px" alt="Seaman send Morse code signals.jpg"></a><br>By Tucker M. Yates - <a rel="nofollow" class="external free" href="http://www.navy.mil/view_image.asp?id=22943">www.navy.mil</a>, <br>
+Public Domain, <a href="https://commons.wikimedia.org/w/index.php?curid=91632">Link</a></p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/J38TelegraphKey.jpg" alt="Morse Code key">
+
+</div>
+
+<div style="float: left;padding-left:10px;overflow:wrap;">
+<h3>Morse Code Signaller for Raspberry Pi</h3>
+<p>Flashes LED connected to GPIO headers. <br>
+To flash higher-wattage lamp, connect a relay.</p>
+Original Message: {{ original }}
+<p>
+Morse Code: {{ morse }}
+</p>
+<p>
+<p>Enter a short message - keep it less than about 8 - 10 words. Alpha and numbers only.</p>
+<form action=".">
+<textarea name="msg" cols="50" maxlength='50' onkeyup="textCounter(this,'counter',50);" id="message"></textarea>
+<input type="submit">
+<br>Chars left: <span id="counter"></span>
+<script>
+function textCounter(field,field2,maxlimit)
+{
+ var countfield = document.getElementById(field2);
+ if ( field.value.length > maxlimit ) {
+  field.value = field.value.substring( 0, maxlimit );
+  return false;
+ } else {
+  countfield.innerHTML = maxlimit - field.value.length;
+ }
+}
+</script>
+</form>
+
+<p>Note: This translator uses a subset of International (ITU) Morse Code.</p>
+<table>
+{% for row in range(keys|length)|batch(5, '&nbsp;') %}
+<tr>
+{% for column in row %}
+<td class="k">{{ keys[column] }} </td><td class="v"> {{ values[column] }} </td>
+{% endfor %}
+</tr>
+{% endfor %}
+</table>
+<p>By: Rory MacLysaght<br>
+Encrypt function based on code by Palash Nigam @ <a href="https://www.geeksforgeeks.org/morse-code-translator-python/">Geeks for Geeks</a></p>
+
+</div>
+</body>
